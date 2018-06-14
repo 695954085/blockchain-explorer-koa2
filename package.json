@@ -1,0 +1,19 @@
+{
+  "name": "blockchain-explorer-koa2",
+  "version": "1.0.0",
+  "description": "blockchain",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "koa2"
+  ],
+  "author": "agree",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.5.1",
+    "koa2": "^2.0.0-alpha.7"
+  }
+}
