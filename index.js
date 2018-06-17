@@ -1,35 +1,21 @@
 const Koa = require('koa');
+const serve = require('koa-static');
+const path = require('path');
+const compress = require('koa-compress');
 const app = new Koa();
 
-// x-response-time
+app.use(compress());
 
-app.use(async (ctx, next) => {
-  const start = Date.now();
-  await next();
-  const ms = Date.now() - start;
-  ctx.set('X-Response-Time', `${ms}ms`);
-});
+app.use(serve(path.join(__dirname, 'public')))
 
-// logger
-app.use(async (ctx, next) => {
-  const start = Date.now();
-  let result = await next();
-  console.log(result);
-  const ms = Date.now() - start;
-  console.log(`${ctx.method} ${ctx.url} - ${ms}`);
-});
-
-// response
-
-app.use(async ctx => {
-  ctx.body = 'Hello World';
-  return "haha";
-});
+app.use(async (ctx) => {
+  ctx.body = "haha"
+})
 
 app.on('error', (err, ctx) => {
-  log.error('server error', err, ctx)
+  console.log(err);
 });
 
-app.listen(3000,()=>{
+app.listen(3000, () => {
   console.log('正在监听3000端口');
 });
