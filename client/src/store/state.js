@@ -27,12 +27,6 @@ const state = {
     }]
   }],
   currentUser: {
-    username: 'user1',
-    blocks: [{
-      no: 1
-    }, {
-      no: 2
-    }]
   },
   loginUser: {
     username: 'admin'

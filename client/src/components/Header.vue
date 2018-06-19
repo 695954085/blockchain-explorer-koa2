@@ -5,7 +5,7 @@
     </span>
     <div class="bheader__selectUser">
       <span class="selectUser__title">CurrentUser</span>
-      <el-select v-model="selectUser" placeholder="请选择" v-on:change="changeCurrentUser">
+      <el-select v-model="selectUser" placeholder="请选择当前用户" v-on:change="changeCurrentUser">
         <el-option v-for="item in userListSelectOptions" :key="item" :label="item" :value="item">
         </el-option>
       </el-select>
@@ -34,7 +34,7 @@ export default {
   },
   props: ["showMenuIcon"],
   computed: {
-    ...mapState(["currentUser", "loginUser"]),
+    ...mapState(["currentUser", "loginUser","userList"]),
     ...mapGetters(["userListSelectOptions"])
   },
   methods: {
@@ -42,6 +42,9 @@ export default {
     showLeftSide() {
       this.$emit("showLeftSide");
     },
+  },
+  mounted(){
+    // this.selectUser = this.userList[0].username;
   }
 };
 </script>
