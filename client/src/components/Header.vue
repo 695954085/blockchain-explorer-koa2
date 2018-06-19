@@ -5,9 +5,9 @@
     </span>
     <div class="bheader__selectUser">
       <span class="selectUser__title">CurrentUser</span>
-      <el-select v-model="selectUser" placeholder="请选择">
+      <el-select v-model="selectUser" placeholder="请选择" v-on:change="changeCurrentUser">
         <el-option v-for="item in userListSelectOptions" :key="item" :label="item" :value="item">
-        </el-option>this.currentUser.username
+        </el-option>
       </el-select>
     </div>
     <div class="bheader__profile">
@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters,mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -38,9 +38,10 @@ export default {
     ...mapGetters(["userListSelectOptions"])
   },
   methods: {
+    ...mapMutations(['changeCurrentUser']),
     showLeftSide() {
       this.$emit("showLeftSide");
-    }
+    },
   }
 };
 </script>
