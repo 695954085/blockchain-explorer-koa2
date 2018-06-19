@@ -18,9 +18,8 @@
 </template>
 
 <script>
-import { requestLogin, axiosSetAuth } from "@/api";
-import { mapMutations } from "vuex";
-import { STORETOKEN, INITUSER } from "../store/mutation-types";
+/* eslint-disable */
+import { requestLogin } from "@/api";
 
 export default {
   name: "login",
@@ -39,16 +38,13 @@ export default {
     };
   },
   methods: {
-    ...mapMutations([STORETOKEN]),
     handleSubmit() {
-      let _this = this;
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.logining = true;
           let loginParams = {
             userName: this.ruleForm2.account,
             password: this.ruleForm2.checkPass,
-            avatar: "http://localhost:3000/img/1.jpg"
           };
           requestLogin(loginParams).then(response => {
             this.logining = false;
@@ -59,10 +55,8 @@ export default {
                 type: "error"
               });
             } else if (data.code == 200) {
-              // 浏览器被关闭的时候，sessionStorage会被清理
               this.$store.commit(INITUSER, data.user);
               axiosSetAuth(data.user.token);
-              // 执行某个Mutation，把axios的header设置token
               this.$router.push("/");
             } else {
               this.$message({
@@ -75,7 +69,6 @@ export default {
       });
     },
     toRegister() {
-      this.$router.push("/register");
     }
   }
 };

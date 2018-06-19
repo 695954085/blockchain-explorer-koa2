@@ -9,7 +9,8 @@ app.use(compress());
 app.use(serve(path.join(__dirname, 'public')))
 
 app.use(async (ctx) => {
-  ctx.body = "haha"
+  ctx.status = 404;
+  ctx.body = "404 NOT FOUND"
 })
 
 app.on('error', (err, ctx) => {

@@ -8,8 +8,8 @@
 
 <script>
 export default {
-  name: "App"
-};
+  name: 'App'
+}
 </script>
 
 <style>
@@ -19,6 +19,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100%;
 }
 
 .fadein-enter-active, .fadein-leave-active {
@@ -26,5 +27,11 @@ export default {
 }
 .fadein-enter, .fadein-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+html,body{
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }
 </style>
