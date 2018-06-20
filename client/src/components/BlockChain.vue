@@ -7,8 +7,12 @@
       <el-header>
         <bheader v-bind:showMenuIcon="isShowLeftSide" v-on:showLeftSide='showLeftSide'></bheader>
       </el-header>
-      <el-main><mainside></mainside></el-main>
-      <el-footer><chain></chain></el-footer>
+      <el-main>
+        <mainside></mainside>
+      </el-main>
+      <el-footer>
+        <chain></chain>
+      </el-footer>
     </el-container>
   </el-container>
 </template>
@@ -21,7 +25,7 @@ import LeftSide from "@/components/LeftSide";
 export default {
   data() {
     return {
-      isShowLeftSide: true
+      isShowLeftSide: true,
     };
   },
   components: {
@@ -48,13 +52,13 @@ export default {
     padding: 0;
   }
 
-  .el-main{
+  .el-main {
     padding: 0;
     overflow: hidden;
     display: flex;
   }
 
-  .el-footer{
+  .el-footer {
     padding: 0;
   }
 }
