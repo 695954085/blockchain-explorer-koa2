@@ -25,7 +25,7 @@ import LeftSide from "@/components/LeftSide";
 export default {
   data() {
     return {
-      isShowLeftSide: true,
+      isShowLeftSide: false,
     };
   },
   components: {

@@ -50,7 +50,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .bheader {
-  background-color: rgb(206, 166, 166);
+  background-color: rgb(236, 230, 242);
   height: 100%;
   position: relative;
 
@@ -64,6 +64,7 @@ export default {
     .profile__avatar {
       width: 40px;
       height: 40px;
+      border-radius: 20px;
     }
     .el-dropdown {
       cursor: pointer;
