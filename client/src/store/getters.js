@@ -11,12 +11,13 @@ const getters = {
     if (_.isEmpty(state.currentUser)) {
       return 0
     }
-    return state.currentUser.blocks.length
+    return state.currentUser.height
   },
   userListSelectOptions (state) {
-    return state.userList.map(value => {
-      return value.username
-    })
+    if (!_.isEmpty(state.userList)) {
+      return Object.keys(state.userList)
+    }
+    return []
   }
 }
 

@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="12">
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item>{{currentUser.username}}</el-breadcrumb-item>
+          <el-breadcrumb-item>{{currentUser.user}}</el-breadcrumb-item>
           <el-breadcrumb-item>{{currentBlockNo | blockNoFilter}}</el-breadcrumb-item>
         </el-breadcrumb>
       </el-col>
@@ -42,7 +42,7 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import _ from "lodash";
 export default {
   data() {
@@ -51,9 +51,13 @@ export default {
   watch: {},
   computed: {
     ...mapState(["currentUser", "currentBlockNo"]),
+    ...mapGetters(['currentUserBlocks']),
     currentBlock() {
       if (!_.isEmpty(this.currentUser) && this.currentBlockNo !== -1) {
-        return this.currentUser.blocks[this.currentBlockNo];
+        // return this.currentUser.blocks[this.currentBlockNo];
+        return this.currentUserBlocks.find(value => {
+          return value.number == this.currentBlockNo;
+        });
       }
       return Object.create(null);
     }

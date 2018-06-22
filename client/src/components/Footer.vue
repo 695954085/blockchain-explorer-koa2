@@ -2,8 +2,8 @@
   <div class="bfooter">
     <span class="bfooter__title">BLOCKS</span>
     <ul class="bfooter__contentWrapper">
-      <li class='blockitem' v-for='block in currentUserBlocks' :key='block.no' v-on:click="changeCurrentBlockNo(block.no)">
-        <el-tag type="info">{{block.no}}</el-tag>
+      <li class='blockitem' v-for='block in currentUserBlocks' :key='block.no' v-on:click="changeCurrentBlockNo(block.number)">
+        <el-tag type="info">{{block.number}}</el-tag>
       </li>
     </ul>
   </div>

@@ -1,4 +1,3 @@
-// 首先获取请求头，检查etag cache-control
 const fresh = require('fresh')
 const fs = require('mz/fs')
 const etag = require('etag')

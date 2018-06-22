@@ -1,15 +1,20 @@
 const mutations = {
   changeCurrentUser (state, currentUser) {
-    state.userList.forEach(function (value) {
-      if (value.username === currentUser) {
-        state.currentUser = value
-        state.currentBlockNo = -1
-        return false
-      }
-    })
+    let cpCurrentUser = Object.create(state.userList[currentUser])
+    cpCurrentUser.user = currentUser
+    state.currentUser = cpCurrentUser
   },
   changeCurrentBlockNo (state, blockNo) {
     state.currentBlockNo = blockNo
+  },
+  saveUserList (state, userList) {
+    state.userList = userList
+  },
+  saveAdmin (state, username) {
+    state.loginUser.username = username
+  },
+  clear (state) {
+    state.userList = {}
   }
 }
 

@@ -12,13 +12,13 @@
     </div>
     <div class="bheader__profile">
       <img src="../assets/logo.png" alt="" class="profile__avatar">
-      <el-dropdown>
+      <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
           {{loginUser.username}}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>退出</el-dropdown-item>
+          <el-dropdown-item command="exit">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -32,19 +32,27 @@ export default {
       selectUser: ""
     };
   },
-  props: ["showMenuIcon"],
+  props: ['showMenuIcon'],
   computed: {
-    ...mapState(["currentUser", "loginUser","userList"]),
-    ...mapGetters(["userListSelectOptions"])
+    ...mapState(['loginUser']),
+    ...mapGetters(['userListSelectOptions'])
   },
   methods: {
-    ...mapMutations(['changeCurrentUser']),
+    ...mapMutations(['changeCurrentUser','clear']),
     showLeftSide() {
       this.$emit("showLeftSide");
     },
-  },
-  mounted(){
-    // this.selectUser = this.userList[0].username;
+    handleCommand(command){
+      switch(command){
+        case 'exit':
+          this.clear()
+          this.$router.push('/login')
+          break
+
+        default:
+          break
+      }
+    }
   }
 };
 </script>

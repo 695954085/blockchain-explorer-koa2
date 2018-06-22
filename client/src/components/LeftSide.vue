@@ -3,27 +3,23 @@
     <span class='leftside__closebutton' v-on:click='showLeftSide'>
       <i class='el-icon-close'></i>
     </span>
-    <ul>
+    <!-- <ul>
       <li v-for="user in userList" :key="user.id">
         <div></div>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   data() {
     return {};
   },
   computed: {
-    ...mapState(["userList"])
   },
   methods:{
     showLeftSide(){
-      console.log(this);
       this.$emit('showLeftSide');
     }
   }
