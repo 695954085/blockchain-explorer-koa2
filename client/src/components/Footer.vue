@@ -2,11 +2,11 @@
   <div class="bfooter">
     <span class="bfooter__title is-vertical">BLOCKS</span>
     <ul class="bfooter__contentWrapper is-vertical">
-      <li class='blockitem' v-for='block in currentUserBlocks' :key='block.number' v-on:click="changeCurrentBlockNo(block.number)">
-        <el-tag :type="block.isSelected ? 'success' : 'danger'">{{block.number}}</el-tag>
+      <li class='blockitem' v-for='(block, index) in currentUserBlocks' :key='block.number' v-on:click="changeCurrentBlockNo(block.number)">
+        <el-tag :type="block.isSelected ? 'success' : 'danger'">{{index}}</el-tag>
       </li>
     </ul>
-    <el-button :disabled='currentUser.user === undefined ? true : false' @click='commit' class="is-vertical" type="primary" icon="el-icon-plus" circle></el-button>
+    <el-button :disabled='commitButtonDisabled' @click='commit' class="is-vertical" type="primary" icon="el-icon-plus" circle></el-button>
   </div>
 </template>
 <script>
@@ -19,7 +19,13 @@ export default {
   },
   computed: {
     ...mapGetters(["currentUserBlocks"]),
-    ...mapState(["currentUser", "loginUser"])
+    ...mapState(["currentUser", "loginUser"]),
+    commitButtonDisabled(){
+      if (!this.currentUser.user || this.loginUser.username === 'bank' || this.loginUser.username === 'third') {
+        return true
+      }
+      return false
+    }
   },
   methods: {
     ...mapMutations(["changeCurrentBlockNo","updateUserList"]),
