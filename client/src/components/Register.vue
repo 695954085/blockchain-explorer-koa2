@@ -42,6 +42,7 @@ export default {
             user: this.ruleForm2.account
           };
           requestRegister(loginParams).then(response => {
+            this.logining = false;
             let { data, status, statusText } = response;
             if (status !== 200) {
               this.$message({
@@ -56,6 +57,12 @@ export default {
             } else {
               this.$router.push("/login");
             }
+          }).catch(error => {
+            this.$message({
+                message: error.message,
+                type: "error"
+              });
+            this.logining = false;
           });
         }
       });

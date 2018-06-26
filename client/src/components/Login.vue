@@ -21,6 +21,7 @@
 /* eslint-disable */
 import { requestLogin } from "@/api";
 import { mapMutations } from "vuex";
+import _ from 'lodash'
 
 export default {
   name: "login",
@@ -55,12 +56,19 @@ export default {
                 message: statusText || "服务器异常",
                 type: "error"
               });
+              this.logining = false
               return;
             }
             // 把data放进去state中
             this.saveUserList(data.message);
             this.saveAdmin(this.ruleForm2.account);
             this.$router.push("/");
+          }).catch(error => {
+              this.$message({
+                message: error.message || "服务器异常",
+                type: "error"
+              });
+              this.logining = false
           });
         }
       });
