@@ -11,37 +11,53 @@
 </template>
 <script>
 import { mapGetters, mapMutations, mapState } from "vuex";
-import { invoke } from "@/api";
+import { invoke, requestLogin } from "@/api";
+import _ from "lodash";
 export default {
   data() {
     return {};
   },
   computed: {
     ...mapGetters(["currentUserBlocks"]),
-    ...mapState(["currentUser"])
+    ...mapState(["currentUser", "loginUser"])
   },
   methods: {
-    ...mapMutations(["changeCurrentBlockNo"]),
-    commit() {
-      this.$prompt("Commit", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消"
-      }).then(({ value }) => {
-          invoke({
-            user: this.currentUser.user,
-            value: value
-          }).then(value => {
-            console.log(value)
-            }).catch(error => {
-
-            });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "取消输入"
-          });
+    ...mapMutations(["changeCurrentBlockNo","updateUserList"]),
+    async commit() {
+      try {
+        let { value } = await this.$prompt("Commit", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消"
         });
+        let { data, status, statusText } = await invoke({
+          user: this.currentUser.user,
+          value: value
+        });
+        if (status !== 200 || !data.message ) {
+          this.$message({
+            message: statusText || "服务器异常",
+            type: "error"
+          });
+          return;
+        }
+        // 上传成功,重新获取blocks数据
+        let result = await requestLogin({
+          user: this.loginUser.username
+        });
+        if (result.status !== 200 ) {
+          this.$message({
+            message: result.statusText || "服务器异常",
+            type: "error"
+          });
+          return;
+        }
+        this.updateUserList(result.data.message)
+      } catch (error) {
+        this.$message({
+          type: "error",
+          message: error.message || "取消输入"
+        });
+      }
     }
   }
 };
