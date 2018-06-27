@@ -8,7 +8,7 @@
         </el-breadcrumb>
       </el-col>
     </el-row>
-    <el-row class="blockdetail">
+    <el-row class="blockdetail" v-show="false">
       <el-col :span="5">
         <span>Data: </span>
         <el-tooltip class="item" effect="dark" :content="currentBlock.dataHash" placement="top-start">
@@ -23,13 +23,11 @@
       </el-col>
     </el-row>
     <el-row class="txdetail">
-      <el-col :span="20">
+      <el-col :span="15">
         <el-table :data="currentBlock.txs" style="width: 100%" border>
           <el-table-column prop="id" label='id' width="280">
           </el-table-column>
           <el-table-column prop="timestamp" label='timestamp' width="180">
-          </el-table-column>
-          <el-table-column prop="nonce" label='nonce' width="180">
           </el-table-column>
           <el-table-column label='content'>
             <template slot-scope="scope">
