@@ -33,11 +33,13 @@ const mutations = {
     // 对比length
     let oldHeight = state.userList[state.currentUser.user].height
     let newHeight = newUserList[state.currentUser.user].height
+    Vue.set(state.userList[state.currentUser.user], 'height', newHeight)
     if (oldHeight < newHeight) {
       let sub = newHeight - oldHeight
-      for (let i = 0; i < sub; i++) {
-        // vue 内置 push
-        state.userList[state.currentUser.user].blocks.push(newUserList[state.currentUser.user].blocks[i])
+      for (let i = sub - 1; i >= 0; i--) {
+        // vue 内置 unshift
+        state.userList[state.currentUser.user].blocks.unshift(newUserList[state.currentUser.user].blocks[i])
+        // state.userList[state.currentUser.user].blocks.push(newUserList[state.currentUser.user].blocks[i])
       }
     }
   }

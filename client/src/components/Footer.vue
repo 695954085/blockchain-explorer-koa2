@@ -2,8 +2,8 @@
   <div class="bfooter">
     <span class="bfooter__title is-vertical">BLOCKS</span>
     <ul class="bfooter__contentWrapper is-vertical">
-      <li class='blockitem' v-for='(block, index) in currentUserBlocks' :key='block.number' v-on:click="changeCurrentBlockNo(block.number)">
-        <el-tag :type="block.isSelected ? 'success' : 'danger'">{{index}}</el-tag>
+      <li class='blockitem' v-for='block in currentUserBlocks' :key='block.number' v-on:click="changeCurrentBlockNo(block.number)">
+        <el-tag :type="block.isSelected ? 'success' : 'danger'">{{block.number}}</el-tag>
       </li>
     </ul>
     <el-button :disabled='commitButtonDisabled' @click='commit' class="is-vertical" type="primary" icon="el-icon-plus" circle></el-button>
