@@ -1,5 +1,5 @@
 const config = {
-  GoServerHost: '192.168.31.48',
+  GoServerHost: '127.0.0.1',
   GoServerPort: '8080'
 }
 

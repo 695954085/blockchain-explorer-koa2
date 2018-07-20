@@ -4,7 +4,6 @@ import Login from '@/components/Login'
 import BlockChain from '@/components/BlockChain'
 import Register from '@/components/Register'
 import store from '../store'
-import _ from 'lodash'
 
 Vue.use(Router)
 
@@ -33,11 +32,19 @@ router.beforeEach((to, from, next) => {
     next()
     return
   }
-  if (_.isEmpty(store.state.userList)) {
+  if (!store.state.isLogin && storage()) {
     next('/login')
     return
   }
   next()
 })
+
+// 判断sessionStorage
+function storage () {
+  if (sessionStorage.getItem('isLogin')) {
+    store.commit('reStore')
+  }
+  return !store.state.isLogin
+}
 
 export default router

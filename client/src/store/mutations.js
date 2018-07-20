@@ -2,9 +2,7 @@ import Vue from 'vue'
 
 const mutations = {
   changeCurrentUser (state, currentUser) {
-    // let cpCurrentUser = Object.create()
     state.userList[currentUser].user = currentUser
-    // cpCurrentUser.user = currentUser
     state.currentUser = state.userList[currentUser]
   },
   changeCurrentBlockNo (state, blockNo) {
@@ -18,16 +16,29 @@ const mutations = {
     state.currentBlockNo = blockNo
   },
   saveUserList (state, userList) {
+    sessionStorage.setItem('userList', JSON.stringify(userList))
     state.userList = userList
   },
   saveAdmin (state, username) {
     state.loginUser.username = username
+    state.isLogin = true
+    sessionStorage.setItem('loginUser', JSON.stringify(state.loginUser))
+    sessionStorage.setItem('isLogin', true)
   },
   clear (state) {
     state.userList = {}
     state.currentUser = {}
     state.currentBlockNo = -1
+    state.isLogin = false
     Vue.set(state.loginUser, 'username', '')
+    sessionStorage.removeItem('loginUser')
+    sessionStorage.removeItem('userList')
+    sessionStorage.removeItem('isLogin')
+  },
+  reStore (state) {
+    state.isLogin = sessionStorage.getItem('isLogin')
+    state.userList = JSON.parse(sessionStorage.getItem('userList'))
+    state.loginUser = JSON.parse(sessionStorage.getItem('loginUser'))
   },
   updateUserList (state, newUserList) {
     // 对比length
@@ -39,7 +50,6 @@ const mutations = {
       for (let i = sub - 1; i >= 0; i--) {
         // vue 内置 unshift
         state.userList[state.currentUser.user].blocks.unshift(newUserList[state.currentUser.user].blocks[i])
-        // state.userList[state.currentUser.user].blocks.push(newUserList[state.currentUser.user].blocks[i])
       }
     }
   }

@@ -6,6 +6,7 @@ const state = {
   loginUser: {
     username: ''
   },
+  isLogin: false,
   currentBlockNo: -1
 }
 

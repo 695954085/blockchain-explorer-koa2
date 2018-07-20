@@ -25,7 +25,7 @@ import LeftSide from "@/components/LeftSide";
 export default {
   data() {
     return {
-      isShowLeftSide: false,
+      isShowLeftSide: false
     };
   },
   components: {
@@ -38,6 +38,9 @@ export default {
     showLeftSide() {
       this.isShowLeftSide = !this.isShowLeftSide;
     }
+  },
+  mounted() {
+
   }
 };
 </script>
