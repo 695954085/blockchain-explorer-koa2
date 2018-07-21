@@ -51,6 +51,7 @@ const mutations = {
         // vue 内置 unshift
         state.userList[state.currentUser.user].blocks.unshift(newUserList[state.currentUser.user].blocks[i])
       }
+      sessionStorage.setItem('userList', JSON.stringify(state.userList))
     }
   }
 }

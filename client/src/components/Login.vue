@@ -19,9 +19,9 @@
 
 <script>
 /* eslint-disable */
-import { requestLogin } from "@/api";
+import { query } from "@/api";
 import { mapMutations } from "vuex";
-import _ from 'lodash'
+import _ from "lodash";
 
 export default {
   name: "login",
@@ -40,7 +40,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["saveUserList", "saveAdmin"]),
+    ...mapMutations(["saveAdmin"]),
     handleSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
@@ -48,28 +48,38 @@ export default {
           let loginParams = {
             user: this.ruleForm2.account
           };
-          requestLogin(loginParams).then(response => {
-            this.logining = false;
-            let { data, status, statusText } = response;
-            if (status !== 200) {
+          query(loginParams)
+            .then(response => {
+              this.logining = false;
+              let { data, status, statusText } = response;
+              if (status !== 200) {
+                this.$message({
+                  message: statusText || "服务器异常",
+                  type: "error"
+                });
+                this.logining = false;
+                return;
+              }
+              // 判斷message
+              let { message } = data;
+              if (message === "") {
+                // 沒有該用戶
+                this.$message({
+                  message: "该用户不存在",
+                  type: "error"
+                });
+                return;
+              }
+              this.saveAdmin(this.ruleForm2.account);
+              this.$router.push("/");
+            }).catch(reason => {
+              this.logining = false;
+              console.log(reason);
               this.$message({
-                message: statusText || "服务器异常",
+                message: reason || "服务器异常",
                 type: "error"
               });
-              this.logining = false
-              return;
-            }
-            // 把data放进去state中
-            this.saveUserList(data.message);
-            this.saveAdmin(this.ruleForm2.account);
-            this.$router.push("/");
-          }).catch(error => {
-              this.$message({
-                message: error.message || "服务器异常",
-                type: "error"
-              });
-              this.logining = false
-          });
+            });
         }
       });
     },

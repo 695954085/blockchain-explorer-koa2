@@ -49,7 +49,7 @@ export default {
   watch: {},
   computed: {
     ...mapState(["currentUser", "currentBlockNo"]),
-    ...mapGetters(['currentUserBlocks']),
+    ...mapGetters(["currentUserBlocks"]),
     currentBlock() {
       if (!_.isEmpty(this.currentUser) && this.currentBlockNo !== -1) {
         // return this.currentUser.blocks[this.currentBlockNo];

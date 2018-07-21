@@ -12,3 +12,7 @@ export const requestRegister = params => axios.get(`http://${config.GoServerHost
 export const invoke = params => axios.get(`http://${config.GoServerHost}:${config.GoServerPort}/invoke`, {
   params: params
 })
+
+export const query = params => axios.get(`http://${config.GoServerHost}:${config.GoServerPort}/query`, {
+  params: params
+})
