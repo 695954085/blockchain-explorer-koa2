@@ -1,6 +1,6 @@
 const config = {
-  GoServerHost: '127.0.0.1',
-  GoServerPort: '8080'
+  GoServerHost: '10.8.2.11',
+  GoServerPort: '7000'
 }
 
 export default config
