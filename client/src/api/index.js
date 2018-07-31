@@ -13,6 +13,6 @@ export const invoke = params => axios.get(`http://${config.GoServerHost}:${confi
   params: params
 })
 
-export const query = params => axios.get(`http://${config.GoServerHost}:${config.GoServerPort}/query`, {
+export const query = params => axios.get(`http://${config.GoServerHost}:${config.GoServerPort}/blocks`, {
   params: params
 })
